@@ -1,0 +1,206 @@
+/* =======================
+   Reset & Body
+======================= */
+body {
+    font-family: Tahoma, sans-serif;
+    direction: rtl;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 0;
+}
+
+/* =======================
+   کانتینر فرم
+======================= */
+.container {
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    width: 350px;
+    margin: 50px auto;
+}
+
+/* =======================
+   تیتر
+======================= */
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* =======================
+   برچسب و فیلد
+======================= */
+form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+form input, form select, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* =======================
+   خطاهای فرم (Hint)
+======================= */
+.field-error {
+    color: #C62828;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+/* =======================
+   دکمه‌ها
+======================= */
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* =======================
+   لینک‌ها
+======================= */
+.login-link, .signup-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.login-link a, .signup-link a {
+    color: #2196F3;
+    text-decoration: none;
+}
+
+.login-link a:hover, .signup-link a:hover {
+    text-decoration: underline;
+}
+
+/* =======================
+   هدر و دکمه خروج
+ هدر
+======================= */
+header {
+    background: #2196F3;
+    padding: 10px 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;      /* برای موبایل محتوا زیر هم بیفتد */
+    text-align: center;
+}
+
+header h1 {
+    margin: 0 auto;
+    font-size: 24px;
+    flex: 1 1 100%;      /* روی موبایل عرض کامل */
+}
+
+/* بخش کاربر و خروج */
+header .user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1 1 auto;
+    justify-content: flex-end;
+    margin-top: 5px;      /* کمی فاصله روی موبایل */
+}
+
+/* دکمه خروج */
+header a.logout-btn {
+    background-color: #F44336;
+    padding: 5px 12px;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+header a.logout-btn:hover {
+    background-color: #D32F2F;
+}
+
+/* ریسپانسیو موبایل */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+    }
+    header .user-info {
+        justify-content: center;
+        margin-top: 10px;
+    }
+}
+/* =======================
+   جدول کتاب‌ها
+======================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+table th {
+    background-color: #e0e0e0;
+}
+
+/* ردیف‌های شماره‌دار */
+table td.index {
+    width: 40px;
+}
+
+.messages {
+    margin: 15px auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+.alert {
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* انواع پیام‌ها */
+.alert.success {
+    background: #E8F5E9;
+    color: #2E7D32;
+}
+.alert.warning {
+    background: #FFF3E0;
+    color: #EF6C00;
+}
+.alert.error {
+    background: #FFEBEE;
+    color: #C62828;
+}
+.alert.info {
+    background: #E3F2FD;
+    color: #1565C0;
+}

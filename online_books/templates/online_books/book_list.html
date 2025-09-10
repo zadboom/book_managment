@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>📚 کتابخانه آنلاین</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+
+  <!-- نمایش نام کاربر و خروج -->
+  {% if request.user.is_authenticated %}
+    <div class="flex justify-end items-center gap-4 mb-6">
+      <span class="font-bold text-gray-700">{{ request.user.username }}</span>
+      <a href="{% url 'logout' %}" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">خروج</a>
+    </div>
+  {% endif %}
+
+  <!-- عنوان -->
+  <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">📚 کتابخانه آنلاین</h1>
+
+  <!-- دکمه افزودن کتاب -->
+  <div class="text-center mb-6">
+    <a href="{% url 'add_book' %}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-md">
+      ➕ افزودن کتاب جدید
+    </a>
+  </div>
+
+  <!-- فرم فیلتر -->
+  <form method="get" class="bg-white p-6 rounded-xl shadow-md mb-8 flex flex-wrap justify-center gap-4">
+    <input type="text" name="q" placeholder="نام کتاب یا نویسنده"
+           value="{{ request.GET.q }}"
+           class="px-4 py-2 border rounded-lg w-64">
+
+    <input type="number" step="0.01" name="min_price" placeholder="حداقل قیمت"
+           value="{{ request.GET.min_price }}"
+           class="px-4 py-2 border rounded-lg w-32">
+
+    <input type="number" step="0.01" name="max_price" placeholder="حداکثر قیمت"
+           value="{{ request.GET.max_price }}"
+           class="px-4 py-2 border rounded-lg w-32">
+
+    <select name="category" class="px-4 py-2 border rounded-lg">
+      <option value="">همه دسته‌ها</option>
+      {% for cat in categories %}
+        <option value="{{ cat.id }}" {% if cat.id|stringformat:"s" == selected_category %}selected{% endif %}>
+          {{ cat.name }}
+        </option>
+      {% endfor %}
+    </select>
+
+    <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg">🔍 فیلتر</button>
+    <a href="{% url 'book_list' %}" class="bg-gray-500 hover:bg-gray-600 text-white px-5 py-2 rounded-lg">🗑️ پاک کردن فیلتر</a>
+  </form>
+
+  <!-- جدول لیست کتاب‌ها -->
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-white rounded-xl shadow-md overflow-hidden">
+      <thead class="bg-green-600 text-white">
+        <tr>
+          <th class="px-4 py-3">ردیف</th>
+          <th class="px-4 py-3">عنوان</th>
+          <th class="px-4 py-3">نویسنده</th>
+          <th class="px-4 py-3">دسته‌بندی</th>
+          <th class="px-4 py-3">قیمت</th>
+          <th class="px-4 py-3">تاریخ انتشار</th>
+          <th class="px-4 py-3">عملیات</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200 text-center">
+        {% for book in books %}
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3">{{ forloop.counter }}</td>
+            <td class="px-4 py-3">{{ book.title }}</td>
+            <td class="px-4 py-3">{{ book.author }}</td>
+            <td class="px-4 py-3">
+              {% if book.category %} {{ book.category.name }} {% else %} - {% endif %}
+            </td>
+            <td class="px-4 py-3">{{ book.price }} تومان</td>
+            <td class="px-4 py-3">{{ book.publish_date }}</td>
+            <td class="px-4 py-3 flex justify-center gap-2">
+              <a href="{% url 'edit_book' book.id %}" class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-lg">🖉 ویرایش</a>
+              <a href="{% url 'delete_book' book.id %}" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg"
+                 onclick="return confirm('آیا مطمئن هستید می‌خواهید این کتاب حذف شود؟');">🗑️ حذف</a>
+              <a href="{% url 'toggle_favorite' book.id %}" class="bg-pink-500 hover:bg-pink-600 text-white px-3 py-1 rounded-lg">
+                {% if book in request.user.userprofile.favorite_books.all %}
+                  ❤️
+                {% else %}
+                  ♡
+                {% endif %}
+              </a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="7" class="px-4 py-3 text-gray-500">هیچ کتابی ثبت نشده است.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>
