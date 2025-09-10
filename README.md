@@ -32,7 +32,7 @@ Users can sign up, log in, add books, and filter them by category, price, or aut
 git clone https://github.com/username/bookmanagement.git
 cd bookmanagement
 
-2. ساخت virtualenv و فعال‌سازی / Create and activate virtual environment:
+### 2.ساخت virtualenv و فعال‌سازی / Create and activate virtual environment:
 python -m venv venv
 # ویندوز / Windows
 venv\Scripts\activate
