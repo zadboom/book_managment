@@ -31,5 +31,5 @@ Users can sign up, log in, add books, and filter them by category, price, or aut
 ```bash
 git clone https://github.com/username/bookmanagement.git
 cd bookmanagement
-#### 1. کلون کردن پروژه / Clone the repository:
+#### 2. کلون کردن پروژه / Clone the repository:
 
